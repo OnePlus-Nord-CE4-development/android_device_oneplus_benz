@@ -292,12 +292,8 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
-
-PRODUCT_COPY_FILES += \
-    vendor/qcom/opensource/power/config/crow/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
-
-$(call soong_config_set,qtipower,tap_to_wake_node,/proc/touchpanel/double_tap_enable)
+    android.hardware.power-service.lineage-libperfmgr \
+    libqti-perfd-client
 
 # QSPA
 PRODUCT_PACKAGES += \
@@ -332,8 +328,12 @@ PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
     hardware/oplus \
-    hardware/pixelworks/interfaces
+    hardware/qcom-caf/common/libqti-perfd-client \
+	hardware/pixelworks/interfaces
 
 # Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
