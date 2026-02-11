@@ -280,6 +280,7 @@ PRODUCT_PACKAGES += \
     OPlusSettingsProviderResTarget \
     OPlusSettingsResTarget \
     OPlusSystemUIResTarget \
+    PixelLauncherResTarget \
     WifiResTarget
 
 # Partitions
