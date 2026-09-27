@@ -263,6 +263,9 @@ PRODUCT_PACKAGES += \
     vendor.oplus.hardware.osense.client-service \
     vendor.oplus.hardware.performance-service
 
+# OplusParts
+$(call inherit-product, packages/apps/OplusParts/oplusparts.mk)
+
 # Overlays
 $(call inherit-product, hardware/oplus/overlay/generic/generic.mk)
 $(call inherit-product, hardware/oplus/overlay/qssi/qssi.mk)
