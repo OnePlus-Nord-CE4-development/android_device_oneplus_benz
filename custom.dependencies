@@ -1,5 +1,9 @@
 [
   {
+    "repository": "inferno0230/android_packages_apps_OplusParts",
+    "target_path": "packages/apps/OplusParts"
+  }.
+  {
     "repository": "PixelOS-AOSP/android_hardware_oplus",
     "target_path": "hardware/oplus"
   },
