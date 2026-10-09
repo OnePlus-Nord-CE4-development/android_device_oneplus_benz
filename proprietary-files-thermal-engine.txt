@@ -1,0 +1,6 @@
+## All proprietary files from this list, unless pinned and noted otherwise,
+## are from OnePlus Nord CE4 (CPH2613_16.0.5.1301(EX01)).
+
+# Thermal engine
+odm/etc/temperature_profile/sys_thermal_control_config.xml
+vendor/etc/thermal-engine.conf
