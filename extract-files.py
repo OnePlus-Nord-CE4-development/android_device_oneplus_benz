@@ -71,6 +71,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libshims_aidl_fingerprint_v2.oplus.so'),
     'odm/bin/hw/vendor.oplus.hardware.charger-V11-service': blob_fixup()
         .add_needed('libbase_shim.so'),
+    'odm/etc/resourcemanager.xml': blob_fixup()
+        .regex_replace('<speaker_protection_enabled>1</speaker_protection_enabled>', '<speaker_protection_enabled>0</speaker_protection_enabled>'),
     'odm/etc/init/init.network.rc': blob_fixup()
         .regex_replace(r'/\* (Huo\.Chen@SYSTEM\.RF, 2024/09/06, Add for ICC) \*/', r'# \1'),
     'odm/lib64/libAlgoProcess.so': blob_fixup()
