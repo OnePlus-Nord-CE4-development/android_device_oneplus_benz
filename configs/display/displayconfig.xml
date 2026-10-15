@@ -69,5 +69,9 @@
             <timeMinSecs>0</timeMinSecs>
         </timing>
         <allowInLowPowerMode>false</allowInLowPowerMode>
+        <sdrHdrRatioMap>
+            <point><sdrNits>2.0000</sdrNits><hdrRatio>2.0000</hdrRatio></point>
+            <point><sdrNits>889.4320</sdrNits><hdrRatio>2.0000</hdrRatio></point>
+        </sdrHdrRatioMap>
     </highBrightnessMode>
 </displayConfiguration>
