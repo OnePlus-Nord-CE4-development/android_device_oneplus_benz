@@ -119,6 +119,7 @@ vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 
 # Audio
 odm/lib64/lib_lvacfs.so
+odm/lib64/libalogencrypt.so
 odm/lib64/liblvacfs_wrapper.so
 vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
@@ -575,6 +576,7 @@ odm/etc/camera/gesture/tt_hand_gesture_v11.1.model
 odm/etc/camera/gesture/tt_hand_kp_v6.0.model
 odm/etc/camera/gesture/tt_hand_lr_v3.0.model
 odm/etc/camera/meishe_lut/ByYo3If
+odm/etc/camera/meishe_lut/city.cube.rgb.bin
 odm/etc/camera/meishe_lut/Cold.cube.rgb.bin
 odm/etc/camera/meishe_lut/DL_A_MoneyBall.bin
 odm/etc/camera/meishe_lut/DL_B_Inception.bin
@@ -583,7 +585,9 @@ odm/etc/camera/meishe_lut/DL_D_G4.cube.rgb.bin
 odm/etc/camera/meishe_lut/DL_L_B6.cube.rgb.bin
 odm/etc/camera/meishe_lut/Delta400.3dl.rgb.bin
 odm/etc/camera/meishe_lut/Emerald.cube.rgb.bin
+odm/etc/camera/meishe_lut/island.cube.rgb.bin
 odm/etc/camera/meishe_lut/Martin.cube.rgb.bin
+odm/etc/camera/meishe_lut/mountains.cube.rgb.bin
 odm/etc/camera/meishe_lut/OPLUSR0604.cube.rgb.bin
 odm/etc/camera/meishe_lut/Radiance.cube.rgb.bin
 odm/etc/camera/meishe_lut/Serenity.cube.rgb.bin
@@ -873,6 +877,7 @@ odm/etc/camera/stereoParams.bin
 odm/etc/camera/text_enhance_yuv_v1.tflite
 odm/etc/camera/thirdcap_config.json
 odm/etc/camera/wide.bin
+odm/etc/init/init.camera_process.rc
 odm/etc/init/init.camera_upate.rc
 odm/etc/init/init.odm.camera.provider.override.rc
 odm/etc/init/vendor.oplus.hardware.cammidasservice-V1-service.rc
@@ -943,6 +948,7 @@ odm/lib64/libFilterWrapper.so
 odm/lib64/libHDRDetection.so
 odm/lib64/libHIS.so
 odm/lib64/libImageWarpMask.so;FIX_SONAME
+odm/lib64/libmsnativefilter.so
 odm/lib64/libODNN.so
 odm/lib64/libOGLManager.so
 odm/lib64/libOPAlgoCamAIBeautyBodyDetection.so
@@ -968,6 +974,7 @@ odm/lib64/libSnpeHtpPrepare.so
 odm/lib64/libSnpeHtpV68Stub.so
 odm/lib64/libSnpeHtpV69Stub.so
 odm/lib64/libSnpeHtpV73Stub.so
+odm/lib64/libssd_det.so
 odm/lib64/libSuperTextWrapper.so
 odm/lib64/libUpScale.so
 odm/lib64/libVDBayerHDR.so
