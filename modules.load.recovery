@@ -1,6 +1,5 @@
 adsp_loader_dlkm.ko
 adsp_sleepmon.ko
-aw8697.ko
 bam_dma.ko
 bcl_soc.ko
 boot_stats.ko
@@ -21,7 +20,7 @@ glink_pkt.ko
 glink_probe.ko
 gpucc-crow.ko
 gpucc-kalama.ko
-haptic.ko
+aw_haptic_hv_v1_5.ko
 hvc_gunyah.ko
 i3c-master-msm-geni.ko
 last_boot_reason.ko

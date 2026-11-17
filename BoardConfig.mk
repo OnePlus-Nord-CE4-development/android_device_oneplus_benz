@@ -138,7 +138,8 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/wlan/platform \
     qcom/opensource/wlan/qcacld-3.0/.qca6750 \
     qcom/opensource/bt-kernel \
-    nxp/opensource/driver
+    nxp/opensource/driver \
+    awinic
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
