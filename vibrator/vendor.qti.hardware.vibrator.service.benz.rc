@@ -1,0 +1,8 @@
+service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service.benz
+    class hal
+    user system
+    group system input wakelock
+    capabilities BLOCK_SUSPEND
+
+on post-fs-data
+    write /sys/class/leds/vibrator/trigger "transient"
