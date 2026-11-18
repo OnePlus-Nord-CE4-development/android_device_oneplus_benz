@@ -34,7 +34,6 @@
 #pragma once
 
 #include <aidl/android/hardware/vibrator/BnVibrator.h>
-#include <thread>
 #include <mutex>
 
 namespace aidl {
@@ -42,43 +41,16 @@ namespace android {
 namespace hardware {
 namespace vibrator {
 
-class OffloadGlinkConnection {
-public:
-    int GlinkOpen(std::string& dev);
-    int GlinkClose();
-    int GlinkPoll();
-    int GlinkRead(uint8_t *data, size_t size);
-    int GlinkWrite(uint8_t *buf, size_t buflen);
-private:
-    std::string dev_name;
-    int fd;
-};
-
-class PatternOffload {
-public:
-    PatternOffload();
-    void SSREventListener(void);
-    void SendPatterns();
-    int mEnabled;
-private:
-    OffloadGlinkConnection GlinkCh;
-    int initChannel();
-    int sendData(uint8_t *data, int len);
-};
-
 class InputFFDevice {
 public:
     InputFFDevice();
     int playEffect(int effectId, EffectStrength es, long *playLengthMs);
-    int playPrimitive(int primitiveId, float amplitude, long *playLengthMs);
     int on(int32_t timeoutMs);
     int off();
     int setAmplitude(uint8_t amplitude);
     bool isPresent();
     bool mSupportGain;
     bool mSupportEffects;
-    bool mSupportExternalControl;
-    bool mInExternalControl;
 
 private:
     int play(int effectId, uint32_t timeoutMs, long *playLengthMs);
@@ -88,26 +60,9 @@ private:
     std::mutex mtx;
 };
 
-class LedVibratorDevice {
-public:
-    LedVibratorDevice();
-    int on(int32_t timeoutMs);
-    int off();
-    bool mDetected;
-    bool mIsLdo;
-private:
-    int write_value(const char *file, const char *value);
-};
-
 class VibratorOL : public BnVibrator {
 public:
-    bool mSupportVISense;
     class InputFFDevice ff;
-    class LedVibratorDevice ledVib;
-    VibratorOL();
-    ~VibratorOL();
-
-    class PatternOffload Offload;
 
     ndk::ScopedAStatus getCapabilities(int32_t* _aidl_return) override;
     ndk::ScopedAStatus off() override;
@@ -139,14 +94,6 @@ public:
     ndk::ScopedAStatus getSupportedBraking(std::vector<Braking>* supported) override;
     ndk::ScopedAStatus composePwle(const std::vector<PrimitivePwle> &composite,
                                const std::shared_ptr<IVibratorCallback> &callback) override;
-private:
-    static void composePlayThread(VibratorOL *vibrator,
-                        const std::vector<CompositeEffect>& composite,
-                        const std::shared_ptr<IVibratorCallback>& callback);
-    std::thread composeThread;
-    int epollfd;
-    int pipefd[2];
-    std::atomic<bool> inComposition;
 };
 
 }  // namespace vibrator
