@@ -34,35 +34,45 @@
 #pragma once
 
 #include <aidl/android/hardware/vibrator/BnVibrator.h>
+#include <atomic>
+#include <chrono>
 #include <mutex>
+#include <vector>
 
 namespace aidl {
 namespace android {
 namespace hardware {
 namespace vibrator {
 
+/* A RAM waveform of the haptics firmware, or a gain ramp over the looped constant wave */
+struct Segment {
+    int32_t delayMs;
+    uint8_t wave;
+    int32_t lengthMs;
+    float startScale;
+    float endScale;
+};
+
 class InputFFDevice {
 public:
     InputFFDevice();
-    int playEffect(int effectId, EffectStrength es, long *playLengthMs);
-    int on(int32_t timeoutMs);
+    int playWave(uint8_t wave, float scale);
+    int playConstant(int32_t timeoutMs, float scale);
+    int setGain(float scale);
     int off();
-    int setAmplitude(uint8_t amplitude);
     bool isPresent();
-    bool mSupportGain;
-    bool mSupportEffects;
 
 private:
-    int play(int effectId, uint32_t timeoutMs, long *playLengthMs);
+    int play(int16_t wave, int32_t timeoutMs, float scale);
     int mVibraFd;
     int16_t mCurrAppId;
-    int16_t mCurrMagnitude;
     std::mutex mtx;
 };
 
 class VibratorOL : public BnVibrator {
 public:
-    class InputFFDevice ff;
+    VibratorOL();
+    ~VibratorOL();
 
     ndk::ScopedAStatus getCapabilities(int32_t* _aidl_return) override;
     ndk::ScopedAStatus off() override;
@@ -94,6 +104,20 @@ public:
     ndk::ScopedAStatus getSupportedBraking(std::vector<Braking>* supported) override;
     ndk::ScopedAStatus composePwle(const std::vector<PrimitivePwle> &composite,
                                const std::shared_ptr<IVibratorCallback> &callback) override;
+private:
+    class InputFFDevice ff;
+    ndk::ScopedAStatus playSequence(std::vector<Segment> segments,
+                                    const std::shared_ptr<IVibratorCallback>& callback);
+    static void sequencePlayThread(VibratorOL *vibrator, std::vector<Segment> segments,
+                                   std::shared_ptr<IVibratorCallback> callback);
+    bool waitStop(std::chrono::steady_clock::time_point deadline);
+    void stopSequence();
+    int epollfd;
+    int pipefd[2];
+    std::atomic<bool> inSequence;
+    /* The amplitude follows setAmplitude() only while a constant vibration plays */
+    std::atomic<bool> mConstantActive;
+    std::atomic<float> mAmplitude;
 };
 
 }  // namespace vibrator
